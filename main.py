@@ -47,7 +47,7 @@ class EditableTable(ttk.Frame):
         self._sort_state: Dict[str, bool] = {}
 
         toolbar = ttk.Frame(self)
-        toolbar.pack(fill="x", pady=(0, 4))
+        toolbar.grid(row=0, column=0, columnspan=2, sticky="ew", pady=(0, 4))
         ttk.Button(toolbar, text="+ Zeile", command=self.add_row).pack(side="left", padx=2)
         ttk.Button(toolbar, text="– Zeile", command=self.delete_row).pack(side="left", padx=2)
         ttk.Button(toolbar, text="⧉ Duplizieren", command=self.duplicate_row).pack(side="left", padx=2)
@@ -62,7 +62,9 @@ class EditableTable(ttk.Frame):
         self.tree.grid(row=1, column=0, sticky="nsew")
         vsb.grid(row=1, column=1, sticky="ns")
         hsb.grid(row=2, column=0, sticky="ew")
+        self.rowconfigure(0, weight=0)
         self.rowconfigure(1, weight=1)
+        self.rowconfigure(2, weight=0)
         self.columnconfigure(0, weight=1)
 
         for name, label, typ in self.fields:
